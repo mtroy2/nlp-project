@@ -9,7 +9,9 @@ def main():
 	clean_files(ser_file, ser_out, 'serious')
 	# combo file
 	combine_files(open(os.getcwd() + '/Data/clean_sarcasm.txt'), open(os.getcwd() + '/Data/clean_serious.txt'), open(os.getcwd() + '/Data/clean_data.txt', 'w+') )
-
+	combine_files(open(os.getcwd() + '/Data/clean_sarcasm.txt').readlines()[:306], open(os.getcwd() + '/Data/clean_serious.txt').readlines()[:573], open(os.getcwd() + '/Data/train_data.txt', 'w+') )
+	combine_files(open(os.getcwd() + '/Data/clean_sarcasm.txt').readlines()[306:], open(os.getcwd() + '/Data/clean_serious.txt').readlines()[573:], open(os.getcwd() + '/Data/test_data.txt', 'w+') )
+	
 def clean_files(in_file, out_file, tag):
 	rev = False
 	s = ''
