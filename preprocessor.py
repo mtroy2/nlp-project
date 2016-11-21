@@ -1,14 +1,16 @@
-
 import os
+
 def main():
 	sarc_file = open(os.getcwd() + '/Data/sarcasm.txt')
 	ser_file = open(os.getcwd() + '/Data/serious.txt')
 	sarc_out = open(os.getcwd() + '/Data/clean_sarcasm.txt', 'w+')
 	ser_out = open(os.getcwd() + '/Data/clean_serious.txt', 'w+')
-	clean_files(sarc_file, sarc_out)
-	clean_files(ser_file, ser_out)
+	clean_files(sarc_file, sarc_out, 'sarcastic')
+	clean_files(ser_file, ser_out, 'serious')
+	# combo file
+	combine_files(open(os.getcwd() + '/Data/clean_sarcasm.txt'), open(os.getcwd() + '/Data/clean_serious.txt'), open(os.getcwd() + '/Data/clean_data.txt', 'w+') )
 
-def clean_files(in_file, out_file):
+def clean_files(in_file, out_file, tag):
 	rev = False
 	s = ''
 	for line in in_file:
@@ -19,6 +21,7 @@ def clean_files(in_file, out_file):
 			# have reached end of review
 			if '</REVIEW>' in line:
 				out_file.write(s)
+				out_file.write('\n')
 				s = ''
 				rev = False
 		# not currently in a review
@@ -26,7 +29,8 @@ def clean_files(in_file, out_file):
 			# started a review
 			if '<REVIEW>' in line:
 				rev = True
-				x = line.split('<REVIEW>')[1]	# only take stuff on line after start tag
+				x = tag + ' '
+				x += line.split('<REVIEW>')[1]	# only take stuff on line after start tag
 				# review starts and ends on same line
 				if '</REVIEW>' in x:	# only take stuff on line before close tag
 					rev = False
@@ -34,6 +38,14 @@ def clean_files(in_file, out_file):
 				s += x
 	if rev:
 		out_file.write(s)
+
+def combine_files(f1, f2, outfile):
+	for line in f1:
+		line = line.strip('\n') + '\n'
+		outfile.write(line)
+	for line in f2:
+		line = line.strip('\n') + '\n'
+		outfile.write(line)
 
 if __name__ == '__main__':
 	main()
