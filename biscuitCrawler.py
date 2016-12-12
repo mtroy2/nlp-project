@@ -6,8 +6,8 @@ numArticles = 8260
 articlesPerPage = 20
 numPages = 413
 def biscuit_spider(maxPages):
-    curArticle =6100
-    page = 300
+    curArticle =3264
+    page = 166
     
     
     while page < maxPages:
@@ -72,4 +72,4 @@ def biscuit_spider(maxPages):
         page += 1
 
 if __name__ == "__main__":
-    biscuit_spider(410)
+    biscuit_spider(200)
