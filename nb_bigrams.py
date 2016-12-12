@@ -13,7 +13,7 @@ speakerWordProb = {}
 uniqueWords = set()
 
 def readTrainDocs():
-	f = open("./Data/train_data.txt", "r")
+	f = open("./Data/clean_train.txt", "r")
 	line = f.readline()
 	line = line.strip()
 	while line != "":
@@ -22,7 +22,7 @@ def readTrainDocs():
 	f.close()
 
 def readTestDocs():
-	f = open("./Data/test_data.txt", "r")
+	f = open("./Data/clean_test.txt", "r")
 	line = f.readline()
 	line = line.strip()
 	while line != "":
@@ -34,24 +34,24 @@ def collectCounts():
 	for doc in trainDocs:
 		words = doc.split()
 		numWords = len(words)
+		if len(words) > 0:
+			for i in range(1, numWords - 1):
+				words.append(words[i] + words[i+1])
+			if numWords > 1:
+				words.append('s' + words[1])
+				words.append(words[numWords] + 'e')
 
-		for i in range(1, numWords - 1):
-			words.append(words[i] + words[i+1])
-		if numWords > 1:
-			words.append('s' + words[1])
-			words.append(words[numWords] + 'e')
-
-		if words[0] in speakerCount:
-			speakerCount[words[0]] = speakerCount[words[0]] + 1
-		else:
-			speakerCount[words[0]] = 1
-			speakerWordCount[words[0]] = {}
-		for word in words[1:]:
-			if word in speakerWordCount[words[0]]:
-				speakerWordCount[words[0]][word] = speakerWordCount[words[0]][word] + 1
+			if words[0] in speakerCount:
+				speakerCount[words[0]] = speakerCount[words[0]] + 1
 			else:
-				speakerWordCount[words[0]][word] = 1
-			uniqueWords.add(word)
+				speakerCount[words[0]] = 1
+				speakerWordCount[words[0]] = {}
+			for word in words[1:]:
+				if word in speakerWordCount[words[0]]:
+					speakerWordCount[words[0]][word] = speakerWordCount[words[0]][word] + 1
+				else:
+					speakerWordCount[words[0]][word] = 1
+				uniqueWords.add(word)
 					
 def trainProbabilities():
 	speakerSum = 0
