@@ -14,7 +14,7 @@ wordDict = {}
 speakerDict = {}
 
 def readTrainDocs():
-	f = open("./Data/train_data.txt", "r")
+	f = open("./Data/clean_train.txt", "r")
 	line = f.readline()
 	line = line.strip()
 	while line != "":
@@ -23,7 +23,7 @@ def readTrainDocs():
 	f.close()
 
 def readTestDocs():
-	f = open("./Data/test_data.txt", "r")
+	f = open("./Data/clean_test.txt", "r")
 	line = f.readline()
 	line = line.strip()
 	while line != "":
