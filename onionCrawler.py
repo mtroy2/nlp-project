@@ -1,16 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-numArticles = 35333 - 10196
+numArticles = 35333
 
 articlesPerPage = 20
 numPages = int(numArticles / articlesPerPage)
 maxArticles = 100
 def onion_spider(maxPages):
-    curArticle = 10359
-    page = 493
+    curArticle =34262
+    page = 1640
     
-    maxPages = page + maxPages
+    
     while page < maxPages:
         print(page)
         url = "http://www.theonion.com/search?before=2016-12-10&after=1996-01-01&page=" + str(page)
@@ -47,4 +47,4 @@ def onion_spider(maxPages):
         page += 1
 
 if __name__ == "__main__":
-    onion_spider(1000)
+    onion_spider(1682)
