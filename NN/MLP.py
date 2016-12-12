@@ -1,6 +1,6 @@
 import random
 import numpy as np
-import tensorflow as tf
+#import tensorflow as tf
 import keras as K
 from keras.layers import Dense
 from keras.models import Sequential
@@ -57,27 +57,61 @@ def importData(filename, class_pos):
 	###########################
 	# step 1: data processing #
 	###########################
-	lines = open(filename)
+	lines = open(filename).readlines()
 	num = 0		# num lines in file
 	classes = {}	# dictionary of all the different possible classifications
+	vocab = set()
 	# get num feats and num classes so that function is more generalize to all data files
+	max_len = 0
 	for line in lines:
-		arr = line.strip('\n').split(' ')
-		n_feats = len(arr) - 1
-		num += 1	# number of lines in file4
-		if arr[class_pos] not in classes:
-			classes[arr[class_pos]] = len(classes)
+		words = line.strip('\n').split(' ')
+		for word in words[1:]:
+			vocab.add(word)
+		num += 1	# number of lines in file
+		if words[class_pos] not in classes:
+			classes[words[class_pos]] = len(classes)
+	n_feats = len(vocab)
 	n_class = len(classes)
+	#for line in lines:
+	#	words = line.strip('\n').split(' ')
+	#	# get features (counts of words)
+	#	counts = {}
+	#	for word in words[1:]:
+	#		if word not in counts:
+	#			counts[word] = 0
+	#		counts[word] += 1
+	#	arr[j] = [0. for i in range(n_feats)]
+	#	i = 0
+	#	for w in vocab:
+	#		if w in counts:
+	#			arr[i] = counts[w]
+	#		i += 1
+	#	#arr[:line_len] = line.strip('\n').split(' ')
+	#	if words[class_pos] not in classes:
+	#		classes[words[class_pos]] = len(classes)
 	# init x and y arrays
 	x = np.zeros((num,n_feats)).astype(float)
 	y = np.zeros((num,n_class)).astype(int)
 	i = 0
 	for line in open(filename):
-		arr = line.strip('\n').split(',')
-		# fill in first 4 values into corresponding line of x
+		words = line.strip('\n').split(' ')
+		# get features (counts of words)
+		counts = {}
+		for word in words[1:]:
+			if word not in counts:
+				counts[word] = 0.
+			counts[word] += 1.
+		line_len = len(words)
+		arr = [0. for j in range(n_feats)]
+		j = 0
+		for w in vocab:
+			if w in counts:
+				arr[j] = counts[w]
+			j += 1
+		# fill in with input data
 		x[i][0:n_feats] = map(float,arr[0:n_feats])
 		# fill in with correct classification
-		y[i][classes[arr[class_pos]]] = 1
+		y[i][classes[words[class_pos]]] = 1
 		i += 1
 	return x, y
 
