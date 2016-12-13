@@ -15,29 +15,34 @@ speakerDict = {}
 
 def readTrainDocs():
 	f = open("./Data/clean_train.txt", "r")
-	line = f.readline()
-	line = line.strip()
-	while line != "":
+	lines = f.readlines()
+	#line = line.strip()
+	for i in range(0,10000):
+		line = lines[i]
+		line = line.strip()
 		trainDocs.append(line)
-		line = f.readline()
 	f.close()
 
 def readTestDocs():
 	f = open("./Data/clean_test.txt", "r")
-	line = f.readline()
-	line = line.strip()
-	while line != "":
+	lines = f.readlines()
+	#line = line.strip()
+	for i in range(0,2300):
+	#while line != "":
+		line = lines[i]
+		line = line.strip()
 		testDocs.append(line)
-		line = f.readline()
+		#line = f.readline()
 	f.close()
 
 def initializeLambdas():
 	# initialize lambdas to 0
 	for doc in trainDocs:
 		words = doc.split()
-		speakerSet.add(words[0])
-		for word in words[1:]:
-			wordSet.add(word)
+		if len(words) > 0:
+			speakerSet.add(words[0])
+			for word in words[1:]:
+				wordSet.add(word)
 #	wordSet.add('unk')
 	wordSet.add('<bias>')
 
@@ -111,12 +116,16 @@ if __name__ == "__main__":
 
 	lambdaArray = initializeLambdas()
 
-	for j in range(1, 21):
+	for j in range(1, 8):
 		for i in range(0, len(trainDocs)):
-			sumLogProb += negLogProbSpeakerGivenDoc(lambdaArray, trainDocs[i], trainDocs[i].split()[0])
-			stochGradDescent(negLogProbSpeakerGivenDoc, lambdaArray, trainDocs[i], trainDocs[i].split()[0])
-			if i % 1000 == 0:
-				print("Line %d" % i)
+			if len(trainDocs[i]) > 0:
+				try: 
+					sumLogProb += negLogProbSpeakerGivenDoc(lambdaArray, trainDocs[i], trainDocs[i].split()[0])
+					stochGradDescent(negLogProbSpeakerGivenDoc, lambdaArray, trainDocs[i], trainDocs[i].split()[0])			
+				except IndexError:
+					print('line = ' + trainDocs[i])
+				if i % 1000 == 0:
+					print("Line %d" % i)
 		print("Negative log-probability of train after iteration %d: %f" % (j, sumLogProb))
 		sumLogProb = 0
 		totalCorrect = 0
