@@ -10,11 +10,11 @@ def main():
         #################
         # Input Dataset #
         #################
-        #x,y = importData('../Data/clean_data.txt', 0)
+        x,y = importData('../Data/train_2000.txt', 0)
         ## split data into train and test data
-        #train_x, train_y, test_x, test_y = splitData(x,y)
-        train_x,train_y = importData('../Data/hundred_train.txt', 0)
-        test_x,test_y = importData('../Data/hundred_test.txt', 0)
+        train_x, train_y, test_x, test_y = splitData(x,y)
+        #train_x,train_y = importData('../Data/train_2000.txt', 0)
+        #test_x,test_y = importData('../Data/test_500.txt', 0)
         # train and test network on data
         createNetwork(train_x, train_y, test_x, test_y, 'adam')
 
@@ -46,7 +46,7 @@ def createNetwork(train_x, train_y, test_x, test_y, optimization):
         obj = 'categorical_crossentropy'        # what we are trying to minimize
         network.compile(optimizer=opt, loss=obj, metrics=['accuracy'])  # accuracy for testing the net after
         # training & evaluating
-        NEPOCHS = 10
+        NEPOCHS = 20
         history = network.fit(train_x, train_y,
                 nb_epoch=NEPOCHS,
                 batch_size=1,
