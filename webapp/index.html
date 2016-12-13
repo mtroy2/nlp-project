@@ -39,8 +39,9 @@
 		<h3>Try It Out</h3>
 		<p>Paste the text you wish to classify into the text box below.</p>
 		<div class="form-group">
-			<textarea class="form-control" rows="20" style="width:75% display:inline-block" id="text" placeholder="Paste text here"></textarea>
+			<textarea class="form-control" rows="20" style="width:75% display:inline-block" id="text" onchange="classify()" placeholder="Paste text here"></textarea>
 		</div>
+		<div id="result"></div>
 		<button type="button" class="btn btn-default btn-lg" onclick="classify()">Classify</button>
 	</div>
 	
