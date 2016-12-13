@@ -68,6 +68,11 @@ def trainProbabilities():
 		for word in list(speakerWordCount[speaker].keys()):
 			speakerWordProb[speaker][word] = (speakerWordCount[speaker][word] + delta) / wordSum
 		speakerWordProb[speaker]['unk'] = delta / wordSum
+	
+	for speaker in list(speakerWordProb.keys()):
+		for word in list(speakerWordProb[speaker].keys()):
+			print(speaker + ' ' + word + ' ' + str(speakerWordProb[speaker][word]))
+		print(speaker + ' unk ' + str(speakerWordProb[speaker]['unk']))
 
 def classifySpeakerGivenDoc(doc):
 	words = doc.split()
