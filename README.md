@@ -2,7 +2,7 @@
 2016
 
 To run this code <br />
-Note: for all these files, if you want to change the train/test data, you must manually change it in the code - they accept no parameters
+Note: for all these files, if you want to change the train/test data, you must manually change it in the code - they accept no parameters <br />
 Naive-Bayes<br />
   Unigram <br />
     python nb.py <br />
@@ -12,7 +12,8 @@ Naive-Bayes<br />
     Same case as unigram for changing train/test files <br />
 Logistic Regression <br />
   Note: unigram naive-bayes takes approximately 35 minutes to run on a reduced size dataset <br />
-        Bigrams may take much longer - we have never run it all the way to completion
+        Bigrams may take much longer - we have never run it all the way to completion 
+         <br />
   Unigram <br />
     python lr.py <br />
   Bigram <br />
