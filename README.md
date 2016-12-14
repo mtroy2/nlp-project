@@ -1,7 +1,7 @@
 # nlp-project
 2016
 
-To run this code:\n
+To run this code <br />
 Note: for all these files, if you want to change the train/test data, you must manually change it in the code - they accept no parameters
 Naive-Bayes\n
   Unigram
