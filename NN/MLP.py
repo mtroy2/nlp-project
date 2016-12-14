@@ -13,8 +13,6 @@ def main():
         x,y = importData('../Data/train_2000.txt', 0)
         ## split data into train and test data
         train_x, train_y, test_x, test_y = splitData(x,y)
-        #train_x,train_y = importData('../Data/train_2000.txt', 0)
-        #test_x,test_y = importData('../Data/test_500.txt', 0)
         # train and test network on data
         createNetwork(train_x, train_y, test_x, test_y, 'adam')
 
