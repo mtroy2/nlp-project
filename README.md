@@ -1,9 +1,9 @@
 # nlp-project
 2016
 
-To run this code:
+To run this code:\n
 Note: for all these files, if you want to change the train/test data, you must manually change it in the code - they accept no parameters
-Naive-Bayes
+Naive-Bayes\n
   Unigram
     python nb.py
     If you would like to change the train / test files, you must manually go into the files and change the paths of each file
