@@ -19,4 +19,8 @@ Logistic Regression <br />
   Bigram <br />
     python lr_bigrams.py <br />
 Neural Network <br />
-KELSEY FILL IN PLS <br />
+  Note: to change the number of epochs run, you need to open the network code (MLP.py) and change the value of NEPOCHS (line 47)
+  Note: must have Keras and Python 2.7 installed
+	module load keras
+	python MLP.py
+
